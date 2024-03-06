@@ -1,0 +1,265 @@
+@iconRed: #fc5834;
+@iconWarningRed: #fc5834;
+@iconInfo: #2660fc;
+@iconPrimary: #2660fc;
+@iconDisabled: #aea9b3;
+@iconSuccess: #52c41a;
+@iconRight: #3c763d;
+
+html {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif,
+    Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}
+
+input:focus {
+  outline: none !important;
+}
+
+.tableListOperationStyle {
+  > span {
+    cursor: pointer;
+    margin-right: 20px;
+  }
+}
+
+:global {
+  .ant-btn-primary {
+    background-color: #2660fc;
+  }
+
+  .ant-btn-primary:not(:disabled):hover {
+    background-color: #5180fd;
+  }
+
+  .ant-btn-primary.ant-btn-dangerous {
+    background-color: #fc5834;
+  }
+
+  .ant-btn-primary.ant-btn-dangerous:not(:disabled):hover {
+    background-color: #fd795d;
+  }
+
+  .ant-form-item-label > label {
+    font-size: 12px !important;
+  }
+
+  .ant-menu-root {
+    height: 100%;
+    overflow: auto;
+  }
+
+  .tableListOperationStyle {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 80%;
+
+    > span {
+      cursor: pointer;
+    }
+  }
+
+  .ant-divider-horizontal {
+    margin: 20px 0;
+  }
+
+  .ant-space-align-center {
+    gap: 10px !important;
+  }
+
+  // 过滤筛选的位置
+  .ant-table-filter-column {
+    justify-content: flex-start !important;
+  }
+
+  .ant-table-column-title {
+    flex: none !important;
+  }
+
+  .ant-spin {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    max-height: 100% !important;
+  }
+}
+
+.disabled {
+  color: #bdc3c7 !important;
+  cursor: not-allowed !important;
+  pointer-events: none !important;
+  filter: grayscale(1) !important;
+}
+
+.unDisabled {
+  font-size: 16px;
+  cursor: not-allowed;
+  color: #1890ff;
+}
+
+.required {
+  display: inline-block;
+  margin-inline-end: 4px;
+  color: #ff4d4f;
+  font-size: 14px;
+  font-family: SimSun, sans-serif;
+  line-height: 1;
+}
+
+.iconRed {
+  font-size: 16px;
+  color: @iconRed;
+}
+
+.iconWarningRed {
+  font-size: 16px;
+  color: @iconWarningRed;
+}
+
+.iconInfo {
+  font-size: 16px;
+  color: @iconInfo;
+  cursor: pointer;
+}
+
+.iconPrimary {
+  font-size: 16px;
+  color: @iconPrimary;
+}
+
+.iconDisabled {
+  font-size: 16px;
+  color: @iconDisabled;
+}
+
+.iconSuccess {
+  font-size: 16px;
+  color: @iconSuccess;
+}
+
+.iconRight {
+  font-size: 16px;
+  color: @iconRight;
+}
+
+// 滚动条整体
+::-webkit-scrollbar {
+  z-index: 1000;
+  width: 10px;
+  height: 6px;
+}
+
+// 滚动条滑道
+::-webkit-scrollbar-track {
+  background-color: rgba(0, 0, 0, 0);
+}
+
+// 滚动滑块样式
+::-webkit-scrollbar-thumb {
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  background-color: #f0f0f0; //rgba(0, 0, 0, 0.1);
+  transition: all 0.2s;
+  height: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+// 滚动条的样式，是可以跟 :hover 伪类叠加使用的
+// 滚动条鼠标悬浮时的样式
+:hover::-webkit-scrollbar-thumb {
+  transition: all 0.2s;
+}
+
+// 滚动条上下的箭头按钮
+::-webkit-scrollbar-button {
+  display: none;
+}
+
+::-webkit-scrollbar-corner {
+  display: none;
+}
+.filterContent {
+  height: auto;
+  margin-left: 50px;
+  position: fixed;
+  width: auto !important;
+  box-shadow: 0 6px 16px 0 rgb(0 0 0 / 8%), 0 3px 6px -4px rgb(0 0 0 / 12%), 0 9px 28px 8px rgb(0 0 0 / 5%);
+}
+
+// 大屏popover样式覆盖
+:global {
+  .popoverStyle {
+    .ant-popover-inner {
+      border: 1px solid #15cdfb;
+      border-radius: 2px;
+      background-color: rgba(5, 23, 46, 0.5);
+      color: #fff;
+      padding: 2px;
+    }
+    .ant-popover-arrow::before {
+      background-color: #15cdfb;
+    }
+    // popover中表格
+    .ant-table {
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    .ant-table,
+    .ant-table .ant-table-thead > tr > th {
+      color: rgba(255, 255, 255, 0.8);
+      background: transparent; // 设置表头背景透明
+    }
+
+    .ant-table .ant-table-tbody > tr > td {
+      background: transparent; // 设置表格背景透明
+    }
+
+    .ant-table-cell {
+      border: none !important;
+      padding: 10px 2px;
+
+      &::before {
+        display: none;
+      }
+    }
+
+    .ant-table-thead {
+      .ant-table-cell {
+        color: #15cdfb !important;
+        font-size: 12px;
+      }
+    }
+    .ant-table-row,
+    .ant-table-thead {
+      .ant-table-cell {
+        font-size: 12px;
+        padding: 0 3px;
+      }
+      &:hover {
+        .ant-table-cell {
+          background-color: rgba(0, 0, 0, 0) !important;
+        }
+      }
+    }
+    .ant-table-thead tr:hover,
+    .ant-table-tbody .ant-table-cell,
+    .ant-table-tbody tr:hover {
+      background-color: rgba(0, 0, 0, 0) !important;
+      /* 设置悬停时的背景色 */
+    }
+  }
+}
