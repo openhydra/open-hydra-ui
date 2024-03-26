@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: open-hydra-ui
+  namespace: open-hydra
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: open-hydra-ui
+  template:
+    metadata:
+      labels:
+        app: open-hydra-ui
+    spec:
+      containers:
+      - image: docker.io/99cloud/open-hydra-ui:latest
+        imagePullPolicy: IfNotPresent
+        name: open-hydra-container
+        ports:
+        - containerPort: 80
+          protocol: TCP
+        volumeMounts:
+        - mountPath: /etc/nginx/nginx.conf
+          name: nginx-conf
+          readOnly: true
+          subPath: nginx.conf
+      restartPolicy: Always
+      volumes:
+      - configMap:
+          defaultMode: 420
+          items:
+          - key: nginx.conf
+            path: nginx.conf
+          name: open-hydra-ui-config
+        name: nginx-conf
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: open-hydra-ui
+  namespace: open-hydra
+spec:
+  ports:
+  - nodePort: 30001
+    port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: open-hydra-ui
+  sessionAffinity: None
+  type: NodePort
