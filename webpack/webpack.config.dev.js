@@ -41,7 +41,7 @@ module.exports = merge(
       new HtmlWebpackPlugin({
         title: 'OpenHydra',
         // eslint-disable-next-line no-undef
-        favicon: path.resolve(__dirname, '../public/favicon.png'),
+        favicon: path.resolve(__dirname, '../public/logo.svg'),
         template: path.resolve(__dirname, '../public/index.html')
       }) // new ForkTsCheckerWebpackPlugin(), // 编译时typescript类型检查
     ]

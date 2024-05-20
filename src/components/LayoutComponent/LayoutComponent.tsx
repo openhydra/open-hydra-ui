@@ -4,15 +4,14 @@
  * @Description:
  */
 import {
-  createFromIconfontCN,
   ExportOutlined,
   LogoutOutlined,
   UserOutlined,
-  LeftOutlined,
+  ApartmentOutlined,
   RightOutlined
 } from '@src/utils/antdIcon';
 import stateStorage from '@src/storage/stateStorage';
-import type { MenuProps } from 'antd';
+import {Image, MenuProps} from 'antd';
 import {
   ConfigProvider,
   Layout,
@@ -30,10 +29,9 @@ import * as _ from 'lodash-es';
 import { SlideMenuTitleList } from './constant';
 import { RootContext } from '@src/frame/rootContext';
 import logo from '@src/assets/images/static/img.png';
+import StudentSVG from '@src/assets/images/student/logo.svg';
+import TeacherSVG from '@src/assets/images/teacher/logo.svg';
 
-const IconFont = createFromIconfontCN({
-  scriptUrl: ['//at.alicdn.com/t/font_2001023_a6frjckis3n.js']
-});
 const { Header, Sider } = Layout;
 
 function LayoutComponent() {
@@ -184,7 +182,8 @@ function LayoutComponent() {
                         {item.label}
                       </div>
                     </Tooltip>,
-                    item.key + '_' + index
+                    item.key + '_' + index,
+                    item.icon
                   )
                 );
               menu.breadcrumbItem[currentIndex].path === item.path &&
@@ -212,60 +211,56 @@ function LayoutComponent() {
     <ConfigProvider locale={stateStorage.get('lang') === 'CN' ? zhCN : enUS}>
       <Spin spinning={false}>
         <Layout style={{ height: '100vh' }}>
-            <Header className={styles.header}>
-              <div className={styles.headerLeft}>
-                <div className={styles.logo}>
-                  <img src={logo} alt="" />
-                  <span>OpenHydra</span>
-                </div>
+          <Header className={styles.header}>
+            <div className={styles.headerLeft}>
+              <div className={styles.logo}>
+                <img src={logo} alt=""/>
+                <span>用开源的方式助力人工智能</span>
               </div>
-              <ul className={styles.headerRight}>
-                <li>
-                  <Menu
-                    theme="dark"
-                    mode="horizontal"
-                    onClick={(item) => changeMenu(item.key)}
-                    items={[
-                      {
-                        key: 'user',
-                        icon: <UserOutlined style={{ fontSize: 18, color: '#fff' }} />,
-                        label: stateStorage.get('name'),
-                        children: [
-                          {
-                            key: 'logOut',
-                            icon: <LogoutOutlined style={{ fontSize: 16 }} />,
-                            label: '退出登录'
-                          }
-                        ]
-                      }
-                    ]}
-                  />
-                </li>
-              </ul>
-            </Header>
-
-            <Layout>
-              {!state.LayoutComponent.isAutoEdit && (
-                <Sider
+            </div>
+            <ul className={styles.headerRight}>
+              <li>
+                <Menu
                   theme="light"
-                  width={200}
-                  collapsible
-                  collapsed={collapsed}
-                  style={{ paddingBottom: 93 }}
-                  onCollapse={() => setCollapsed(!collapsed)}
-                  collapsedWidth={0}
-                  trigger={
-                    <div>
-                      {collapsed ? (
-                        <RightOutlined style={{ fontSize: 18 }} />
-                      ) : (
-                        <LeftOutlined style={{ fontSize: 18 }} />
-                      )}
-                    </div>
-                  }
+                  mode="horizontal"
+                  onClick={(item) => changeMenu(item.key)}
+                  items={[
+                    {
+                      key: 'user',
+                      icon: <UserOutlined style={{fontSize: 18, color: '#fff'}}/>,
+                      label: stateStorage.get('name'),
+                      children: [
+                        {
+                          key: 'logOut',
+                          icon: <LogoutOutlined style={{fontSize: 16}}/>,
+                          label: '退出登录'
+                        }
+                      ]
+                    }
+                  ]}
+                />
+              </li>
+            </ul>
+          </Header>
+
+          <Layout>
+            {!state.LayoutComponent.isAutoEdit && (
+              <Sider
+                theme="light"
+                width={256}
+                collapsible
+                collapsed={collapsed}
+                style={{paddingBottom: 93}}
+                onCollapse={() => setCollapsed(!collapsed)}
                 >
                   <div className={`${styles.allService} ${(collapsed && styles.centerAllService) || ''}`}>
-                    <IconFont type={bigTitle?.icon || 'iconjisuan'} style={{ marginRight: 8, fontSize: 18 }} />
+                    {/*<ApartmentOutlined style={{ marginRight: 8, fontSize: 18, height: 20 }} />*/}
+                    {/*<img src={student} />*/}
+                    {
+                      stateStorage.get('role') === 1 ?
+                        <TeacherSVG style={{ width: 30, marginRight:8 }}/> :
+                        <StudentSVG style={{ width: 30, marginRight:8}}/>
+                    }
                     <Tooltip placement="bottomLeft" title={!collapsed && bigTitle?.name}>
                       <span>{!collapsed && bigTitle?.name}</span>
                     </Tooltip>
@@ -275,12 +270,11 @@ function LayoutComponent() {
                     openKeys={(!collapsed && openKeys) || undefined}
                     selectedKeys={selectedKeys}
                     items={currentMenuList}
-                    className={styles.fixMenu}
                   />
                 </Sider>
               )}
 
-              <Layout style={{ padding: '20px', overflow: 'auto' }}>
+              <Layout style={{ padding: '30px', overflow: 'auto', background:'#E4E9F6' }}>
                 <Outlet />
               </Layout>
             </Layout>

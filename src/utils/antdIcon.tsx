@@ -5,6 +5,8 @@
  */
 export {
   createFromIconfontCN,
+  ApartmentOutlined,
+  PoweroffOutlined,
   ExportOutlined,
   LogoutOutlined,
   UserOutlined,

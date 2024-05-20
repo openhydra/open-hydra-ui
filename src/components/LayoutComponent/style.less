@@ -3,6 +3,8 @@
   display: flex;
   justify-content: space-between;
   height: 56px !important;
+  background: linear-gradient(90deg, #5A1FE8 16.4%, #193BE3 100%) !important;
+  z-index: 1;
 
   .headerLeft {
     .logo {
@@ -13,22 +15,22 @@
       align-items: center;
       justify-content: center;
       img {
-        height: 35px;
-        margin-right: 6px;
-        border: 1px solid #ccc;
-        border-radius: 6px;
+        height: 30px;
+        margin-right: 36px;
+        margin-left: 28px;
       }
       span {
-        color: #fff;
-        font-size: 20px;
-        font-weight: bold;
-        font-family: sans-serif;
+        color: #AEA3FF;
+        font-family: MiSans;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
       }
     }
   }
 
   .headerRight {
-    //width: 84%;
     display: flex;
     justify-content: flex-end;
     margin: 0;
@@ -54,62 +56,32 @@
           padding: 0 !important;
         }
       }
+
     }
     :global {
-      :where(.css-dev-only-do-not-override-diro6f).ant-menu-dark.ant-menu-horizontal > .ant-menu-item-selected,
-      :where(.css-dev-only-do-not-override-diro6f).ant-menu-dark.ant-menu-horizontal > .ant-menu-submenu-selected {
-        background: #001529;
+      .ant-menu-light{
+        background: transparent !important;
       }
-    }
-  }
-  :global {
-    :where(.css-dev-only-do-not-override-diro6f).ant-menu-dark.ant-menu-horizontal > .ant-menu-item-selected,
-    :where(.css-dev-only-do-not-override-diro6f).ant-menu-dark.ant-menu-horizontal > .ant-menu-submenu-selected {
-      background: #001529;
-    }
-  }
-}
-.subApp {
-  :global {
-    li.ant-menu-submenu {
-      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-      border-radius: 0;
-    }
-    .ant-menu-submenu-arrow {
-      display: none !important;
-    }
-    .ant-layout-sider-zero-width-trigger {
-      top: 50%;
-    }
-  }
-}
-.drawer {
-  :global {
-    .ant-drawer-body {
-      padding: 0;
-    }
-  }
-}
 
-.menuStyle {
-  width: 100%;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    }
+  }
 }
 
 /*所有服务-菜单样式*/
 .allService {
   margin-top: 4px;
   margin-bottom: 4px;
-  padding: 0 16px;
-  line-height: 40px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 0 27px;
+  line-height: 80px;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 500;
   display: flex;
   align-items: center;
   justify-content: flex-start;
   cursor: pointer;
-  font-weight: bold;
-  font-size: 16px;
-  height: 41px;
+  height: 80px;
+  background: #F3F5FB;
   span:nth-child(2) {
     overflow: hidden;
     text-overflow: ellipsis;
@@ -122,167 +94,40 @@
   justify-content: center !important;
 }
 
-/*所有服务点击后，弹出的主体位置样式*/
-.allServiceBlock {
-}
-
-@keyframes myfirst {
-  0% {
-    width: 0px;
-    option: 0;
-  }
-  75% {
-    left: 600px;
-    option: 0.2;
-  }
-  100% {
-    left: 700px;
-    option: 1;
-  }
-}
-.leftMenu {
-  width: 200px;
-  height: calc(100vh - 56px);
-  overflow-y: auto;
-}
-.fixMenu {
-  :global {
-    .ant-menu-submenu {
-      > div {
-        font-weight: bold;
-      }
-    }
-  }
-}
-
-/*所有服务点击后，弹出的菜单内容样式*/
-.menu {
-  position: absolute;
-  left: 201px;
-  top: 0px;
-  z-index: 1050;
-  background: #ffffff;
-  border-radius: 2px;
-  transform-origin: 0 0;
-  box-shadow: 0px -8px 8px rgba(0, 0, 0, 0.12);
-  padding: 20px 20px 0 20px;
-  height: calc(100vh - 76px);
-  width: 700px;
-  animation: myfirst 0.2s;
-  .search {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid #ddd;
-    :global {
-      .ant-input-search-button {
-        border: none;
-      }
-    }
-    input {
-      width: 97%;
-      border: none;
-    }
-  }
-  .content {
-    width: 100%;
-    margin-top: 20px;
-    height: calc(100vh - 150px);
-    overflow: auto;
-    > div {
-      columns: 3; /*默认列数*/
-      column-gap: 20px; /*列间距*/
-      //max-height: 81vh;
-      > div {
-        width: 200px;
-        height: 100%;
-        break-inside: avoid-page;
-        margin-bottom: 20px;
-        .title {
-          font-size: 14px;
-          color: #0052cc;
-          line-height: 32px;
-        }
-        .subContent {
-          margin-bottom: 20px;
-          .subTitle {
-            font-size: 14px;
-            color: #000;
-            line-height: 32px;
-            border-bottom: 1px solid #ddd;
-            font-weight: bold;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            span.name {
-              width: 80%;
-              overflow: hidden;
-              text-overflow: ellipsis;
-              white-space: nowrap;
-              color: #000;
-            }
-          }
-          ul {
-            list-style-type: none;
-            width: 100%;
-            margin: 0;
-            padding: 0;
-            li {
-              line-height: 25px;
-              font-size: 13px;
-              font-weight: inherit;
-              color: #000;
-              display: flex;
-              justify-content: space-between;
-              align-items: center;
-              cursor: pointer;
-              span.name {
-                width: 80%;
-                overflow: hidden;
-                text-overflow: ellipsis;
-                white-space: nowrap;
-                color: #000;
-                &:hover {
-                  color: #0a6cff;
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-}
-
-/*主体内容的顶部样式*/
-.contentHeader {
-  width: 100%;
-  background: #ffffff;
-  padding: 20px;
-  margin-bottom: 20px;
-  .mainTitle {
-    font-size: 24px;
-    color: #313131;
-    padding-top: 10px;
-    font-family: SourceHanSansSC-medium;
-  }
-}
 
 :global {
-  .ant-layout-sider-trigger {
-    border-top: 1px solid #eee;
+  .ant-layout-sider-light{
+    background: #F3F5FB !important;
+    box-shadow: -1px 0px 0px 0px #F0F0F0 inset !important;
   }
-  .ant-menu-submenu.ant-menu-dark .ant-menu-item-selected {
-    background: #001529 !important;
-    color: rgba(255, 255, 255, 0.65);
+  .ant-menu-light{
+    background: #F3F5FB !important;
   }
-  .ant-layout-sider-zero-width-trigger {
-    inset-inline-end: -20px !important;
-    width: 20px !important;
+  .ant-menu-item svg{
+    font-size: 18px;
+  }
+  .ant-menu-item-selected{
+    border-radius: 12px !important;
+    background: #5B46F6 !important;
+    font-size: 14px !important;
+    font-weight: 400;
+    line-height: 22px;
+    color: #ffffff !important;
+  }
+  .ant-menu-item-selected svg path{
+    fill: #ffffff;
+  }
+  .ant-layout-sider-trigger{
     height: 80px !important;
-    top: 50% !important;
-    background: rgba(0, 0, 0, 0.2) !important;
-    color: #eee !important;
+    display: flex;
+    justify-content: center;
+    background: #E8EBF4 !important;
+    svg{
+      transform: scale(1.8);
+    }
+  }
+  .ant-layout >div{
+    border-radius: 20px;
   }
 }
 

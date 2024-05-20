@@ -3,6 +3,12 @@ import { Spin } from 'antd';
 import React, { lazy, Suspense } from 'react';
 import AuthRoute from './private';
 import * as _ from 'lodash-es';
+import {ExperimentOutlined} from '@src/utils/antdIcon';
+import DeviceSVG from '@src/assets/images/teacher/device.svg';
+import DataSVG from '@src/assets/images/teacher/data.svg';
+import ResourceSVG from '@src/assets/images/teacher/resource.svg';
+import SettingSVG from '@src/assets/images/teacher/setting.svg';
+import UserSVG from '@src/assets/images/teacher/user.svg';
 
 function LazyWrapper(path: string) {
   const Component = lazy(() => import(`@src/pages/${path}`));
@@ -41,6 +47,7 @@ const sourceRouterLists: any = [
           {
             label: '账号管理',
             path: '/teacher',
+            icon: <UserSVG />,
             key: '1',
             element: LazyWrapper('teacher/account'),
             rule: ''
@@ -49,12 +56,14 @@ const sourceRouterLists: any = [
             label: '设备管理',
             path: '/device',
             key: '1',
+            icon: <DeviceSVG />,
             element: LazyWrapper('teacher/device'),
             rule: ''
           },
           {
             label: '数据集管理',
             path: '/data',
+            icon:<DataSVG />,
             key: '1',
             element: LazyWrapper('teacher/data'),
             rule: ''
@@ -62,6 +71,7 @@ const sourceRouterLists: any = [
           {
             label: '课程资源管理',
             path: '/resource',
+            icon: <ResourceSVG />,
             key: '1',
             element: LazyWrapper('teacher/resource'),
             rule: ''
@@ -69,6 +79,7 @@ const sourceRouterLists: any = [
           {
             label: '平台配置',
             path: '/setting',
+            icon:<SettingSVG />,
             key: '1',
             element: LazyWrapper('teacher/setting'),
             rule: ''
@@ -85,6 +96,7 @@ const sourceRouterLists: any = [
             path: '/student',
             key: '0',
             element: LazyWrapper('student'),
+            icon: <ExperimentOutlined />,
             rule: '',
             items: [
               {

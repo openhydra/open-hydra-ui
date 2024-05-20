@@ -25,7 +25,7 @@ module.exports = merge(BASE, {
       template: resolve(__dirname, '../public/index.html'),
       //注入静态资源
       inject: true,
-      favicon: resolve(__dirname, '../public/favicon.png'),
+      favicon: resolve(__dirname, '../public/logo.svg'),
       minify: {
         // 去除html注释
         removeComments: true,

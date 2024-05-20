@@ -6,7 +6,7 @@
  */
 import React, { useEffect, useState } from 'react';
 import LayoutBreadcrumb from '../LayoutBreadcrumb/LayoutBreadcrumb';
-import styles from '../LayoutComponent/style.less';
+import styles from './style.less';
 import { ArrowLeftOutlined } from '@src/utils/antdIcon';
 import { Content } from 'antd/lib/layout/layout';
 import { useLocation } from 'react-router-dom';
@@ -114,6 +114,7 @@ const BaseComponent = (props: {
             margin: 0,
             minHeight: 280,
             backgroundColor: '#fff',
+            borderRadius:4,
             position: 'relative',
             overflowX: 'hidden',
             overflowY: 'auto'

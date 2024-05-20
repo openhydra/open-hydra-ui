@@ -16,6 +16,7 @@ declare module '*.scss' {
   export default classes;
 }
 
+declare module '*.svg';
 declare module 'mockjs';
 declare module 'crypto-js';
 declare module '*.png';

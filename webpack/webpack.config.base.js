@@ -109,6 +109,10 @@ module.exports = smp.wrap({
           }
         }
       },
+      {
+        test: /\.svg$/,
+        use: ['@svgr/webpack'],
+      },
       // 解决使用pro-table 中解析modules时less样式
       {
         test: /\.less$/i,
@@ -140,12 +144,12 @@ module.exports = smp.wrap({
         }
       },
       {
-        test: /\.(png|svg|jpg|jpeg|gif)$/i,
+        test: /\.(png|jpg|jpeg|gif)$/i,
         type: 'asset/resource',
         // 如果图片太大再转成base64, 会让图片的体积增大 30% ，得不偿失。
         generator: {
           filename: 'images/[name][ext]'
-        }
+        },
       },
       {
         test: /\.(woff|woff2|eot|ttf|otf)$/i,

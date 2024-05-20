@@ -137,24 +137,32 @@ const columns = (tableRef, openHandle, closeHandle) => {
       render: (_, record) => <Tag color={record?.spec?.deviceType === 'cpu' ? 'gold' : 'volcano'}>{record?.spec?.deviceType || '-'}</Tag>
     },
     {
-      title: 'jupyterLabUrl',
-      dataIndex: ['spec', 'jupyterLabUrl'],
-      key: 'type',
+      title: '环境名称',
+      dataIndex: ['spec', 'sandboxName'],
+      key: 'sandboxName',
       width: 180,
       ellipsis: {
         showTitle: true
       },
-      render: (_, record) => record?.spec?.jupyterLabUrl ? <a href={record?.spec?.jupyterLabUrl} target="_blank" rel="noop">{record?.spec?.jupyterLabUrl}</a> : '-'
+      render: (_, record) => record?.spec?.sandboxName || '-'
     },
     {
-      title: 'vsCodeUrl',
-      dataIndex: ['spec', 'vsCodeUrl'],
-      key: 'type',
+      title: '环境链接',
+      dataIndex: ['spec', 'sandboxURLs'],
+      key: 'sandboxURLs',
       width: 180,
       ellipsis: {
         showTitle: true
       },
-      render: (_, record) => record?.spec?.vsCodeUrl ? <a href={record?.spec?.vsCodeUrl} target="_blank" rel="noop">{record?.spec?.vsCodeUrl}</a> : '-'
+      render: (_, record) => {
+        if(record?.spec?.sandboxURLs){
+          return record?.spec?.sandboxURLs.split(',')?.map((item) => {
+            return <a href={item} target="_blank" rel="noop">{item}<br/></a>
+          })
+        } else {
+          return '-';
+        }
+      }
     },
     {
       title: '操作',

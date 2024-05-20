@@ -21,7 +21,8 @@ const Data: React.FC = () => {
   const [optionLoading, setOptionLoading] = useState(false);
   const [currentDevice, setCurrentDevice] = useState<any>({});
   const [type, setType] = useState(0); // gpu 1 cpu 0
-  const [ideType, setIdeType] = useState(0); // vscode or jupyterlab
+  const [sandboxName, setSandboxName] = useState('jupyterlab'); // vscode or jupyterlab
+  const [sandboxList, setSandboxLis] = useState<any>([]); // vscode or jupyterlab
 
   // 初始化表格数据
   const {
@@ -45,16 +46,19 @@ const Data: React.FC = () => {
     return res;
   }), { manual: true });
 
+  /* Tips===使用情况 */
   const {
     data: sumupsData
   } = useRequest(() => DevicesServices.getDevicesSum());
 
+  /* 默认的设备类型 === 在菜单平台设置中进行配置的*/
   const {
     data: defaultDeviceType,
     refresh
   } = useRequest(() => SettingServices.getDefaultSetting({}).then((res) => {
     setType(res.spec?.default_gpu_per_device);
-    setIdeType(3);
+    setSandboxName(Object.keys(res.spec?.plugin_list?.sandboxes)[0] || '');
+    setSandboxLis(res.spec?.plugin_list?.sandboxes ? Object.keys(res.spec?.plugin_list?.sandboxes) : [])
     return res;
   }), {manual: true});
 
@@ -189,7 +193,7 @@ const Data: React.FC = () => {
               openHydraUsername: currentDevice?.metadata?.name,
               usePublicDataSet: true,
               deviceGpu: type === 1 ? 1 :undefined,
-              ideType: ideType === 4 ? 'vscode' : 'jupyterlab'
+              sandboxName: sandboxName
             }
           }).then(() => {
             setSettingLoading(false);
@@ -205,9 +209,12 @@ const Data: React.FC = () => {
           <Radio value={0}>CPU 实验室</Radio>
           <Radio value={1}>GPU 实验室</Radio>
         </Radio.Group>
-        <Radio.Group onChange={(e) => setIdeType(e.target.value)} value={ideType}>
-          <Radio value={3}>Jupyter Lab</Radio>
-          <Radio value={4}>VSCode</Radio>
+        <Radio.Group onChange={(e) => setSandboxName(e.target.value)} value={sandboxName}>
+          {
+            sandboxList.map((item) => {
+              return  <Radio value={item}>{item}</Radio>
+            })
+          }
         </Radio.Group>
       </Modal>
     </BaseComponent>
