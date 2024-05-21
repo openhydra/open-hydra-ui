@@ -14,7 +14,7 @@ spec:
         app: open-hydra-ui
     spec:
       containers:
-      - image: docker.io/99cloud/open-hydra-ui:latest
+      - image: registry.cn-shanghai.aliyuncs.com/openhydra/open-hydra-ui:latest
         imagePullPolicy: IfNotPresent
         name: open-hydra-container
         ports:
