@@ -31,7 +31,10 @@ const apiService: apiServiceType = {
     delClass: { url: 'v1/courses/{name}', method: 'DELETE' },
     // 设置
     getDefaultSetting: { url: 'v1/settings/default', method: 'GET' },
-    putDefaultSetting: { url: 'v1/settings/default', method: 'PUT' }
+    putDefaultSetting: { url: 'v1/settings/default', method: 'PUT' },
+
+    // 修改密码
+    updateUserPassword: { url: 'v1/openhydrausers/{name}', method: 'PUT' }
   },
   setting: {
     prefix: '/apis/open-hydra-server.openhydra.io/',

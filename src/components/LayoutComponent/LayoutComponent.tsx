@@ -7,11 +7,10 @@ import {
   ExportOutlined,
   LogoutOutlined,
   UserOutlined,
-  ApartmentOutlined,
-  RightOutlined
+  UnlockOutlined
 } from '@src/utils/antdIcon';
 import stateStorage from '@src/storage/stateStorage';
-import {Image, MenuProps} from 'antd';
+import {Modal, MenuProps, message, Form, Input} from 'antd';
 import {
   ConfigProvider,
   Layout,
@@ -31,12 +30,15 @@ import { RootContext } from '@src/frame/rootContext';
 import logo from '@src/assets/images/static/img.png';
 import StudentSVG from '@src/assets/images/student/logo.svg';
 import TeacherSVG from '@src/assets/images/teacher/logo.svg';
+import { checkKeystonePassword } from '@src/utils/regular';
+import * as CommonServices from '@src/services/common';
 
 const { Header, Sider } = Layout;
 
 function LayoutComponent() {
   const navigate = useNavigate();
   const routerParams = useParams();
+  const [form] = Form.useForm();
   // 获取全局的数据
   const { state } = useContext(RootContext);
 
@@ -52,6 +54,8 @@ function LayoutComponent() {
   const [bigTitle, setBigTitle] = useState<any>({});
   const [openKeys, setOpenKeys] = useState([]);
   const [selectedKeys, setSelectedKeys] = useState<any>([]);
+  const [passwordOpen, setPasswordOpen] = useState(false);
+  const [editLoading, setEditLoading] = useState(false);
 
 
 
@@ -79,6 +83,8 @@ function LayoutComponent() {
     if (key === 'logOut') {
       navigate('/login');
       stateStorage.clear();
+    } else if (key === 'changePassword') {
+      setPasswordOpen(true);
     }
   };
 
@@ -195,7 +201,44 @@ function LayoutComponent() {
       }
     });
   };
-
+  const editPasswordHandle = () => {
+    form.validateFields().then(async (values) => {
+      CommonServices.updateUserPassword(
+        {
+          metadata:{name: stateStorage.get('name')},
+          spec:{password: values.password, role: stateStorage.get('role')}
+        }, {name: stateStorage.get('name')}
+      )
+        .then(() => {
+          message.success('修改成功');
+          stateStorage.set('password', values.password);
+          setEditLoading(false);
+          setPasswordOpen(false);
+        })
+        .catch((error) => {
+          setEditLoading(false);
+          message.success(error.error.message);
+        });
+    });
+  };
+  /**
+   * @desc 密码校验
+   * */
+  const validatorPassword = (rule, value, type?: string) => {
+    let password = form.getFieldValue('password');
+    let confirmPassword = form.getFieldValue('confirmPassword');
+    if (!checkKeystonePassword(value)) {
+      return Promise.reject('密码需要包含数字、字母、且长度至少7位');
+    } else if (
+      confirmPassword !== password &&
+      confirmPassword?.length > 0 &&
+      password?.length > 0 &&
+      type === 'confirm'
+    ) {
+      return Promise.reject('两次密码不一致');
+    }
+    return Promise.resolve();
+  };
   useEffect(() => {
     let role = stateStorage.get('role');
     let allMenuList = routerLists.filter((item) => item.path === '/')[0]?.children;
@@ -230,6 +273,11 @@ function LayoutComponent() {
                       icon: <UserOutlined style={{fontSize: 18, color: '#fff'}}/>,
                       label: stateStorage.get('name'),
                       children: [
+                        {
+                          key: 'changePassword',
+                          icon: <UnlockOutlined style={{ fontSize: 16 }} />,
+                          label:'修改密码'
+                        },
                         {
                           key: 'logOut',
                           icon: <LogoutOutlined style={{fontSize: 16}}/>,
@@ -279,6 +327,42 @@ function LayoutComponent() {
               </Layout>
             </Layout>
         </Layout>
+        <Modal
+          title={'修改密码'}
+          open={passwordOpen}
+          onOk={editPasswordHandle}
+          onCancel={() => {
+            setPasswordOpen(false);
+            form.resetFields();
+          }}
+          okText={'确认'}
+          cancelText={'取消'}
+          confirmLoading={editLoading}
+        >
+          <Form form={form} name={'editUser'} labelCol={{ span: 6 }} wrapperCol={{ span: 14 }}>
+            <Form.Item
+              label={'新密码'}
+              name="password"
+              rules={[
+                { required: true, message: ''},
+                { validator: (rule, value) => validatorPassword(rule, value) }
+              ]}
+            >
+              <Input.Password autoComplete="new-password" placeholder={'请输入新密码'} />
+            </Form.Item>
+            <Form.Item
+              label={'确认新密码'}
+              name="confirmPassword"
+              dependencies={['password']}
+              rules={[
+                { required: true, message: '' },
+                { validator: (rule, value) => validatorPassword(rule, value, 'confirm') }
+              ]}
+            >
+              <Input.Password placeholder={'请再次输入新密码'} />
+            </Form.Item>
+          </Form>
+        </Modal>
       </Spin>
     </ConfigProvider>
   );
