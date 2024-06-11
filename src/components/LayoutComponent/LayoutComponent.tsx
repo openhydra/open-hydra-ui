@@ -137,7 +137,7 @@ function LayoutComponent() {
                 // 所有二级菜单扁平化，放入array数组中
                 array.push(
                   getItem(
-                    <Tooltip placement="bottomLeft" title={ol.label}>
+                    // <Tooltip placement="topRight" title={ol.label}>
                       <div
                         style={{ display: 'flex', alignItems: 'center' }}
                         onClick={() => {
@@ -149,8 +149,8 @@ function LayoutComponent() {
                         {ol.subKey && ol.key !== item.key && (
                           <ExportOutlined style={{ fontSize: 16, marginLeft: 8, color: '#aaa' }} />
                         )}
-                      </div>
-                    </Tooltip>,
+                      </div>,
+                    // </Tooltip>,
                     ol.key + '_' + index
                   )
                 );
@@ -159,9 +159,10 @@ function LayoutComponent() {
               });
               currentItems.push(
                 getItem(
-                  <Tooltip placement="bottomLeft" title={item.label}>
-                    {item.label}
-                  </Tooltip>,
+                  item.label,
+                  // <Tooltip placement="topRight" title={item.label}>
+                  //   {item.label}
+                  // </Tooltip>,
                   item.key,
                   null,
                   array
@@ -178,7 +179,7 @@ function LayoutComponent() {
               (item.rule === '') &&
                 currentItems.push(
                   getItem(
-                    <Tooltip placement="bottomLeft" title={item.label}>
+                    // <Tooltip placement="topRight" title={item.label}>
                       <div
                         onClick={() => {
                           setSelectedKeys([item.key + '_' + index]);
@@ -186,8 +187,8 @@ function LayoutComponent() {
                         }}
                       >
                         {item.label}
-                      </div>
-                    </Tooltip>,
+                      </div>,
+                    // </Tooltip>,
                     item.key + '_' + index,
                     item.icon
                   )
@@ -306,12 +307,16 @@ function LayoutComponent() {
                     {/*<img src={student} />*/}
                     {
                       stateStorage.get('role') === 1 ?
-                        <TeacherSVG style={{ width: 30, marginRight:8 }}/> :
-                        <StudentSVG style={{ width: 30, marginRight:8}}/>
+                        <TeacherSVG style={{ width: 30}}/> :
+                        <StudentSVG style={{ width: 30}}/>
                     }
-                    <Tooltip placement="bottomLeft" title={!collapsed && bigTitle?.name}>
-                      <span>{!collapsed && bigTitle?.name}</span>
-                    </Tooltip>
+                    {
+                      !collapsed &&
+                      <Tooltip placement="bottomLeft" title={!collapsed && bigTitle?.name}>
+                        <span style={{paddingLeft: 8}}>{!collapsed && bigTitle?.name}</span>
+                      </Tooltip>
+                    }
+
                   </div>
                   <Menu
                     mode="inline"

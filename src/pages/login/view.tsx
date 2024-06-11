@@ -11,7 +11,7 @@ import * as LoginServices from '@src/services/login/login';
 import { LockOutlined, UserOutlined } from '@src/utils/antdIcon';
 import stateStorage from '@src/storage/stateStorage';
 import { encode } from 'js-base64';
-import logo from '@src/assets/images/static/img.png';
+import logo from '@src/assets/images/static/login_logo.png';
 
 const Login: React.FC = () => {
   const navigate = useNavigate();
@@ -35,15 +35,10 @@ const Login: React.FC = () => {
   return (
     <div className={styles.view}>
       <div className={styles.left}>
-        <div className={styles.intro}>
-          {/*<img alt={CMP} src={login_left} />*/}
-        </div>
-      </div>
-      <div className={styles.right}>
-        <div className={styles.right_top}>
+        <div className={styles.left_top}>
           <img alt={'OpenHydra'} src={logo} />
           <div>
-              <span>OpenHydra</span>
+              {/*<span>OpenHydra</span>*/}
             {/*<span className={styles.cmp}>{CMP}</span>*/}
           </div>
         </div>
@@ -94,6 +89,11 @@ const Login: React.FC = () => {
           </Form>
         </div>
         <div className={styles.right_bottom}>{/*@{CMP} {version}*/}</div>
+      </div>
+      <div className={styles.right}>
+        <div className={styles.intro}>
+          {/*<img alt={CMP} src={login_left} />*/}
+        </div>
       </div>
     </div>
   );
