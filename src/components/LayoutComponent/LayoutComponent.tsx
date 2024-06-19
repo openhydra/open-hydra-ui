@@ -272,7 +272,7 @@ function LayoutComponent() {
                     {
                       key: 'user',
                       icon: <UserOutlined style={{fontSize: 18, color: '#fff'}}/>,
-                      label: stateStorage.get('name'),
+                      label: '', //stateStorage.get('name'),
                       children: [
                         {
                           key: 'changePassword',
