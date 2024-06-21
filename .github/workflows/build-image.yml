@@ -16,6 +16,11 @@ jobs:
     env:
       GO111MODULE: on
     steps:
+      - name: Check out code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
       - name: Extract Tag
         id: extract_tag
         run: echo ::set-output name=version::${GITHUB_REF/refs\/tags\//}
