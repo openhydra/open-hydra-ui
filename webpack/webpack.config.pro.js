@@ -11,7 +11,7 @@ const BASE = require('./webpack.config.base.js');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 // eslint-disable-next-line no-undef,@typescript-eslint/no-var-requires
-// const CopyWebpackPlugin = require('copy-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = merge(BASE, {
   mode: 'production',
@@ -36,10 +36,10 @@ module.exports = merge(BASE, {
         // more options:
         // https://github.com/kangax/html-minifier#options-quick-reference
       }
-    })
-    // new CopyWebpackPlugin({
-    //   // patterns: [{ from: resolve(__dirname, '../public/externalLinkConfig.js'), to: resolve(__dirname, '../dist') }]
-    // }) //打包静态资源
+    }),
+    new CopyWebpackPlugin({
+      patterns: [{ from: resolve(__dirname, '../public/studentImg'), to: resolve(__dirname, '../dist/studentImg') }]
+    }) //打包静态资源
     //暂时屏蔽，使用后导致css包导入有误，可能有冲突，后期再解决
     // new PurgeCSSPlugin({ // 删除没有用到的css样式
     //     paths: glob.sync(`${PATHS.src}/**/*`, {nodir: true}),

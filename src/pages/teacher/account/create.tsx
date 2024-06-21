@@ -20,8 +20,7 @@ const CreateAccount = (props) => {
     } else if (
       confirmPassword !== password &&
       confirmPassword?.length > 0 &&
-      password?.length > 0 &&
-      type === 'confirm'
+      password?.length > 0
     ) {
       return Promise.reject('两次密码不一致');
     }

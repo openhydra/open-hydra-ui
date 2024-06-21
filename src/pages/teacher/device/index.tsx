@@ -38,7 +38,10 @@ const Data: React.FC = () => {
     for(let item of res.items){
       if(!(item.spec.deviceStatus === 'Running' || item.spec.deviceStatus === 'default')){
         setIsLoop(true);
-        intervalTime = setInterval(() => refreshCallBack(), 5000);
+        intervalTime = setInterval(() =>{
+          refreshCallBack();
+          refreshCallBackSum();
+        } , 5000);
         break;
       }
     }
@@ -48,7 +51,8 @@ const Data: React.FC = () => {
 
   /* Tips===使用情况 */
   const {
-    data: sumupsData
+    data: sumupsData,
+    refresh: refreshCallBackSum,
   } = useRequest(() => DevicesServices.getDevicesSum());
 
   /* 默认的设备类型 === 在菜单平台设置中进行配置的*/
