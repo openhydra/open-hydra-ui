@@ -74,6 +74,7 @@
     "@ant-design/icons": "^5.2.6",
     "@ant-design/pro-components": "2.3.40",
     "@babel/runtime": "^7.16.7",
+    "@svgr/webpack": "^8.1.0",
     "ace-builds": "^1.15.3",
     "ahooks": "^3.3.12",
     "antd": "5.1.2",
