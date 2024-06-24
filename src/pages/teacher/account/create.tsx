@@ -28,7 +28,7 @@ const CreateAccount = (props) => {
   };
   return (
     <Form.Item shouldUpdate={() => true} noStyle>
-      {({ getFieldValue, setFieldsValue }) => (
+      {({  }) => (
         <>
           <Form.Item label={'账号'} rules={[{ required: true, message: '请输入账号'}]} name="name">
             <Input placeholder={'请输入'} />
