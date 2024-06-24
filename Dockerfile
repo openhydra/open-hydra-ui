@@ -10,7 +10,7 @@ RUN  pnpm install
 
 COPY . .
 
-RUN npm run pro
+RUN pnpm run pro
 
 FROM nginx:alpine
 

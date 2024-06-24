@@ -15,9 +15,7 @@ import { useRequest } from 'ahooks';
 import * as _ from 'lodash-es';
 
 const Account: React.FC = () => {
-  // const [form] = Form.useForm();
   const tableRef = useRef<any>(null);
-  // const navigate = useNavigate();
   const [createLoading, setCreateLoading] = useState(false);
   const [importData, setImportData] = useState(false);
   const [fileList, setFileList] = useState<any>(null);
